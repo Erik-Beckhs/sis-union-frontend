@@ -1,0 +1,82 @@
+<mat-card>
+    <div class="bg-primary p-3">
+       <span class="text-white h3">Cliente</span> 
+    </div>
+    <div class="p-3">
+        <p>A continuacion ingrese informacion del cliente</p>
+    </div>
+    <form ngNativeValidate #formClient="ngForm" (ngSubmit)="guardar(formClient)">
+        <div class="example-container row">
+            
+            <div class="col-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Tipo de Documento</mat-label>
+                      <mat-select [(ngModel)]="cliente.tipo_doc" name="tipo_doc" id="tipo_doc">
+                        <mat-option *ngFor="let tipo of tipodocs" [value]="tipo.value">{{tipo.name}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+            </div>
+          
+            <div class="col-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Número de Documento</mat-label>
+                    <input required [(ngModel)]="cliente.doc_identidad" id="doc_identidad" name="doc_identidad"  matInput placeholder="Ex. 1245678">
+                  </mat-form-field>
+            </div>
+        </div>
+        <div class="example-container row">
+            <div class="col-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Nombre</mat-label>
+                    <input required [(ngModel)]="cliente.nombre" id="nombre" name="nombre" matInput #input placeholder="Ex. Erik">
+                  </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Genero</mat-label>
+                    <mat-select [(ngModel)]="cliente.genero" id="genero" name="genero">
+                        <mat-option *ngFor="let gen of generos" [value]="gen.value">{{gen.name}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+            </div>
+            
+        </div>
+        <div class="example-container row">
+            <div class="col-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Apellido Paterno</mat-label>
+                    <input required [(ngModel)]="cliente.paterno" id="paterno" name="paterno" matInput placeholder="Ex. Maquera">
+                  </mat-form-field>
+            </div>
+          
+            <div class="col-6">
+                <!--<mat-form-field appearance="fill">
+                    <mat-label>Fecha de Nacimiento</mat-label>
+                    <input type="date" [(ngModel)]="cliente.fecha_nac" id="fecha_nac" name="fecha_nac" matInput>
+                  </mat-form-field>-->
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>Elije una fecha</mat-label>
+                    <input matInput [matDatepicker]="picker" [(ngModel)]="cliente.fecha_nac">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+            </div>
+        </div>
+        <div class="example-container row">
+            
+            <div class="col-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Apellido Materno</mat-label>
+                    <input required [(ngModel)]="cliente.materno" matInput id="materno" name="materno" maxlength="10" placeholder="Ex. Cañasto">
+                  </mat-form-field>
+            </div>
+          
+            
+        </div>
+        <div class="mt-4 d-flex justify-content-end">
+            <button type="reset" mat-raised-button color="accent" class="mx-2">Limpiar</button>
+            <button type="submit" mat-raised-button color="primary">{{cliente.id?'Actualizar':'Registrar'}}</button>
+        </div>
+    </form>
+</mat-card>

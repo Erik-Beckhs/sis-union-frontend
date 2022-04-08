@@ -1,0 +1,19 @@
+<div class="d-flex justify-content-center">
+    <app-spinner *ngIf="_usuario.loading"></app-spinner>
+
+    <div class="shadow card mt-4" style="max-width: 540px;" *ngIf="!_usuario.loading">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="../../../assets/img/{{user.name}}.jpg" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{user.name}}</h5>
+              <p class="card-text"><span class="fw-bold">Email : </span>  {{user.email}}</p>
+              <p class="card-text"><span class="fw-bold">Genero : </span> {{user.gender}}</p>
+              <p class="card-text"><small class="text-muted">{{user.status}} </small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>

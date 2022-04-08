@@ -1,0 +1,14 @@
+<p>
+    <mat-toolbar color="primary">
+        <span>BANCO UNION</span>
+        <span class="example-spacer"></span>
+        <button mat-button [routerLink]="['cliente', 0]" routerLinkActive="active" class="example-icon favorite-icon mx-5" aria-label="Example icon-button with heart icon">
+            <i title="Nuevo Cliente" class="fa fa-user-plus fa-2x"></i>
+            <span class="h5 mx-2">Nuevo</span>
+        </button>
+        <button mat-button [routerLink]="['listado']" routerLinkActive="active" class="example-icon mx-5" aria-label="Example icon-button with share icon">
+            <i title="Lista de Clientes" class="fa fa-users fa-2x"></i>
+            <span class="h5 mx-2">Lista</span>
+        </button>
+      </mat-toolbar>
+</p>
