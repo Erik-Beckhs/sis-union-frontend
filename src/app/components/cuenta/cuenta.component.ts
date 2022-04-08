@@ -6,6 +6,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { CuentaService } from '../../services/cuenta.service';
 
+import swal from 'sweetalert';
+
 @Component({
   selector: 'app-cuenta',
   templateUrl: './cuenta.component.html',
@@ -27,7 +29,9 @@ export class CuentaComponent implements OnInit {
     monto:0,
     fecha_creacion:'',
     sucursal:0
-  }
+  };
+
+  fechaActual:any = new Date();
 
   tipoprods:any;
   sucursal:any;
@@ -57,13 +61,55 @@ export class CuentaComponent implements OnInit {
   }
 
   guardar(element){
-
+    element.id_cliente = this.id;
+    if(element.id){
+      //editar
+    }
+    else{
+      //crear
+      element.fecha_creacion = this.fechaActual;
+      this._cuenta.createCuenta(element).subscribe((res)=>{
+        swal('BANCO UNION', 'Se creó la cuenta de manera exitosa', 'success').then(()=>{
+          this.loadCuentas();
+          this.limpiar();
+        })
+      })
+    }
   }
   editar(element:any){
 
   }
   eliminar(element:any){
+    swal({
+      title: "BANCO UNION",
+      text: "¿Esta seguro de eliminar el registro?",
+      icon: "warning",
+      buttons: ['SI','NO'],
+      dangerMode: true,
+    })
+    .then((value) => {
+      if (!value) {
+        this._cuenta.deleteCuenta(element).subscribe((res)=>{
+          swal("Se eliminó el registro").then(()=>{
+            this.loadCuentas();
+          });
+        })
+      }
+    });
 
+    
+  }
+
+  limpiar(){
+    this.cuenta = {
+      id_cliente:0,
+      tipo_prod:0,
+      num_cuenta:'',
+      moneda:'',
+      monto:0,
+      fecha_creacion:'',
+      sucursal:0
+    }
   }
 
   applyFilter(event: Event) {

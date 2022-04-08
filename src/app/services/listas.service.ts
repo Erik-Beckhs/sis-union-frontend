@@ -27,8 +27,8 @@ export class ListasService {
   ];
 
   monedas:any[]=[
-    {value:1, name:'Bolivianos'},
-    {value:2, name:'Dolares'}
+    {value:'BS', name:'Bolivianos'},
+    {value:'US', name:'Dolares'}
   ];
 
 

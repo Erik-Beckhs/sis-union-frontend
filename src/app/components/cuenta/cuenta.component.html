@@ -5,13 +5,13 @@
             <div class="mt-4 mb-4">
                 <span class="h3">Datos de la Cuenta</span>
             </div>
-            <form ngNativeValidate #formCuenta="ngForm" (ngSubmit)="guardar(formCuenta.value)">
+            <form ngNativeValidate #formCuenta="ngForm" (ngSubmit)="guardar(formCuenta.value)" id="formCuenta´">
                 <div class="example-container row">
                     
                     <div class="col-6">
                         <mat-form-field appearance="fill">
                             <mat-label>Tipo de Producto</mat-label>
-                              <mat-select [(ngModel)]="cuenta.tipo_prod" name="tipo_prod" id="tipo_prod">
+                              <mat-select required [(ngModel)]="cuenta.tipo_prod" name="tipo_prod" id="tipo_prod">
                                 <mat-option *ngFor="let tipo of tipoprods" [value]="tipo.value">{{tipo.name}}</mat-option>
                               </mat-select>
                           </mat-form-field>
@@ -20,7 +20,7 @@
                     <div class="col-6">
                         <mat-form-field appearance="fill">
                             <mat-label>Sucursal</mat-label>
-                              <mat-select [(ngModel)]="cuenta.sucursal" name="sucursal" id="sucursal">
+                              <mat-select required [(ngModel)]="cuenta.sucursal" name="sucursal" id="sucursal">
                                 <mat-option *ngFor="let suc of sucursal" [value]="suc.value">{{suc.name}}</mat-option>
                               </mat-select>
                           </mat-form-field>
@@ -40,7 +40,7 @@
                     <div class="col-6">
                         <mat-form-field appearance="fill">
                             <mat-label>Tipo de Moneda</mat-label>
-                              <mat-select [(ngModel)]="cuenta.moneda" name="moneda" id="moneda">
+                              <mat-select required [(ngModel)]="cuenta.moneda" name="moneda" id="moneda">
                                 <mat-option *ngFor="let moneda of monedas" [value]="moneda.value">{{moneda.name}}</mat-option>
                               </mat-select>
                           </mat-form-field>

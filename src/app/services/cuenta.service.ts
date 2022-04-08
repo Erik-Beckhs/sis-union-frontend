@@ -18,5 +18,15 @@ export class CuentaService {
     return this.http.get(url);
   }
 
+  createCuenta(cuenta:any){
+    let url = `${base_url}/api/cuentas`;
+    return this.http.post(url, cuenta);
+  }
+
+  deleteCuenta(idCuenta:any){
+    let url = `${base_url}/api/cuentas/${idCuenta}`;
+    return this.http.delete(url);
+  }
+
 
 }
