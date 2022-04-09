@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { CuentaService } from '../../services/cuenta.service';
 
 import swal from 'sweetalert';
+import { ClienteService } from '../../services/cliente.service';
 
 @Component({
   selector: 'app-cuenta',
@@ -38,13 +39,16 @@ export class CuentaComponent implements OnInit {
   monedas:any;
   id:any;
 
+  cliente:any;
+
   cuentas:any;
 
   constructor(
     private _list:ListasService,
     private router:Router,
     private activatedRoute:ActivatedRoute,
-    private _cuenta:CuentaService
+    private _cuenta:CuentaService,
+    private _cliente:ClienteService
     ) { 
 
     this.id = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
@@ -55,10 +59,18 @@ export class CuentaComponent implements OnInit {
     this.monedas = this._list.monedas;
 
     this.loadCuentas();
+    this.loadCliente(this.id);
   }
 
   ngOnInit(): void {
   }
+
+  loadCliente(id:any){
+    this._cliente.getClientById(id).subscribe((res)=>{
+      this.cliente = res;
+    })
+  }
+ 
 
   guardar(element){
     element.id_cliente = this.id;

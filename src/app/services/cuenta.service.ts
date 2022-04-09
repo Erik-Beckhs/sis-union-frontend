@@ -27,6 +27,5 @@ export class CuentaService {
     let url = `${base_url}/api/cuentas/${idCuenta}`;
     return this.http.delete(url);
   }
-
-
+  
 }
