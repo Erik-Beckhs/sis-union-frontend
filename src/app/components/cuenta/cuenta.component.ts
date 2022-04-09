@@ -21,6 +21,8 @@ export class CuentaComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   
+  activo:boolean = true;
+
   cuenta:any = {
     id:0,
     id_cliente:0,
