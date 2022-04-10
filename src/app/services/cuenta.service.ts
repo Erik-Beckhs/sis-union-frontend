@@ -36,4 +36,9 @@ export class CuentaService {
     let url = `${base_url}/api/cuentas/${id}`;
     return this.http.patch(url, cuenta);
   }
+
+  getCuentas(){
+    let url = `${base_url}/api/cuentas`;
+    return this.http.get(url);
+  }
 }

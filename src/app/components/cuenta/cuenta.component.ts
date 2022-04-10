@@ -44,6 +44,10 @@ export class CuentaComponent implements OnInit {
 
   cliente!:Cliente;
   cuentas:any;
+
+  cuentasGral:any;
+
+  ultimoID = 0;
   //idCuenta:any;
 
   edit:boolean=false;
@@ -78,9 +82,10 @@ export class CuentaComponent implements OnInit {
  
 
   guardar(element){
-    //element.id_cliente = this.id;
-    // console.log(element);
-    // return;
+    // if(element.monto < 0){
+    //   swal('BANCO UNIÓN', 'El monto no puede ser negativo', '')
+    //   return;
+    // }
     if(this.cuenta.id){
       //editar
       //console.log('editar');
@@ -172,5 +177,20 @@ export class CuentaComponent implements OnInit {
 
   clientes(){
     this.router.navigate(['principal/listado']);
+  }
+
+  // generaCuenta(){
+  //   this._cuenta.getCuentas().subscribe(res=>{
+  //     this.cuentasGral = res;
+  //     console.log(this.cuentasGral);
+  //     console.log(this.cuentasGral.reverse());
+  //   })
+  // }
+
+  nuevaCuenta(){
+    this.activo = false;
+    //this.generaCuenta();
+    //const a = new Date().getTime();
+    this.cuenta.num_cuenta = new Date().getTime();
   }
 }
