@@ -64,8 +64,8 @@
                         <button (click)="clientes()" mat-raised-button color="accent" class="mx-2">Clientes</button>
                     </div>
                     <div>
-                      <button type="reset" (click)="activo = true" mat-raised-button color="accent" class="ms-1">Limpiar</button>
-                      <button (click)="activo = !activo" [disabled]="!activo" mat-raised-button color="primary" class="ms-1">Nuevo</button>
+                      <button type="button" (click)="limpiar()" mat-raised-button color="accent" class="ms-1">Limpiar</button>
+                      <button type="button" (click)="activo = !activo" [disabled]="!activo" mat-raised-button color="primary" class="ms-1">Nuevo</button>
                         <button [disabled]="activo" type="submit" class="ms-1" mat-raised-button color="primary">{{cuenta.id?'Actualizar':'Registrar'}}</button>
                     </div>
                 </div>
@@ -74,8 +74,20 @@
         <div class="col-8">
             <div class="mat-elevation-z8 p-3">
               <div class="mb-2">
-                <mat-icon>supervised_user_circle</mat-icon>
-                <span class="h4 ms-2">Datos del Cliente</span> 
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <mat-icon>supervised_user_circle</mat-icon>
+                    <span class="h4 ms-2">Datos del Cliente</span> 
+                  </div>
+                  <div>
+                    <button mat-raised-button color="primary" [routerLink]="['/principal/cliente', id]">
+                      <mat-icon>
+                        edit
+                      </mat-icon>
+                      Editar
+                    </button>
+                  </div>
+                </div>
              </div>
              <div id="datos" class="fs-15">
                  <div class="row">
@@ -87,12 +99,11 @@
                    <div class="col-5 ms-3">
                        <p><span class="fw-500">Tipo de Documento : </span>{{cliente.tipo_doc | tipodoc}}</p>
                        <p><span class="fw-500">Número de Documento de Identidad : </span>{{cliente.doc_identidad}}</p>
-                     
                    </div>
                  </div>
              </div>
             </div>
-            <div class="mat-elevation-z8 p-3">
+            <div class="mat-elevation-z8 p-3 mt-4">
               <div class="mt-2 mb-1">
                 <mat-icon>credit_card</mat-icon>
                 <span class="h4 ms-2">Listado de Cuentas</span> 
@@ -115,7 +126,7 @@
                 
                     <ng-container matColumnDef="num_cuenta">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header> Número de Cuenta </th>
-                      <td mat-cell *matCellDef="let row"> {{row.num_cuenta}} </td>
+                      <td id="cuenta" (click)="editar(row.id)" mat-cell *matCellDef="let row"> {{row.num_cuenta}} </td>
                     </ng-container>
               
                     <ng-container matColumnDef="moneda">

@@ -11,3 +11,11 @@ table {
       color:white;
       font-size: 1rem;
   }
+
+  #cuenta{
+      color:blue;
+      font-weight:400;
+      text-decoration-color: blue;
+      text-decoration-style: solid;
+      cursor: pointer;
+  }

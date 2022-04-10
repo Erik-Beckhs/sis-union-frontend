@@ -8,6 +8,7 @@ import { CuentaService } from '../../services/cuenta.service';
 
 import swal from 'sweetalert';
 import { ClienteService } from '../../services/cliente.service';
+import { Cliente } from 'src/app/models/cliente.interface';
 
 @Component({
   selector: 'app-cuenta',
@@ -41,9 +42,11 @@ export class CuentaComponent implements OnInit {
   monedas:any;
   id:any;
 
-  cliente:any;
-
+  cliente!:Cliente;
   cuentas:any;
+  //idCuenta:any;
+
+  edit:boolean=false;
 
   constructor(
     private _list:ListasService,
@@ -68,21 +71,32 @@ export class CuentaComponent implements OnInit {
   }
 
   loadCliente(id:any){
-    this._cliente.getClientById(id).subscribe((res)=>{
+    this._cliente.getClientById(id).subscribe((res:any)=>{
       this.cliente = res;
     })
   }
  
 
   guardar(element){
-    element.id_cliente = this.id;
-    if(element.id){
+    //element.id_cliente = this.id;
+    // console.log(element);
+    // return;
+    if(this.cuenta.id){
       //editar
+      //console.log('editar');
+      this._cuenta.updateCuenta(this.cuenta.id, element).subscribe((res:any)=>{
+        swal('BANCO UNIÓN', `Se actualizó la cuenta ${res.num_cuenta} de manera exitosa`, 'success');
+        this.loadCuentas();
+        this.limpiar();
+      })
     }
     else{
+      // console.log('guardar');
+      // return;
+      element.id_cliente = this.id;
       //crear
       element.fecha_creacion = this.fechaActual;
-      this._cuenta.createCuenta(element).subscribe((res)=>{
+      this._cuenta.createCuenta(element).subscribe(()=>{
         swal('BANCO UNION', 'Se creó la cuenta de manera exitosa', 'success').then(()=>{
           this.loadCuentas();
           this.limpiar();
@@ -91,8 +105,16 @@ export class CuentaComponent implements OnInit {
     }
   }
   editar(element:any){
-
+    this._cuenta.getCuentaById(element).subscribe((res)=>{
+      this.cuenta = res;
+      this.activo = false;
+      this.edit = true;
+      //this.idCuenta = res.id;
+    })
+    //getbyid
+    //colocarlo como cliente
   }
+
   eliminar(element:any){
     swal({
       title: "BANCO UNION",
@@ -116,14 +138,17 @@ export class CuentaComponent implements OnInit {
 
   limpiar(){
     this.cuenta = {
-      id_cliente:0,
+     // id:0,
+      //id_cliente:0,
       tipo_prod:0,
       num_cuenta:'',
       moneda:'',
       monto:0,
       fecha_creacion:'',
       sucursal:0
-    }
+    };
+    this.edit = false;
+    this.activo=true;
   }
 
   applyFilter(event: Event) {

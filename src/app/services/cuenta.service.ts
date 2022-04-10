@@ -27,5 +27,13 @@ export class CuentaService {
     let url = `${base_url}/api/cuentas/${idCuenta}`;
     return this.http.delete(url);
   }
-  
+  getCuentaById(id:any){
+    let url = `${base_url}/api/cuentas/${id}`;
+    return this.http.get(url);
+  }
+
+  updateCuenta(id:number, cuenta:any){
+    let url = `${base_url}/api/cuentas/${id}`;
+    return this.http.patch(url, cuenta);
+  }
 }
